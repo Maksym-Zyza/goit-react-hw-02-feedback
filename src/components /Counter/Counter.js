@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import './Counter.css';
+import Controls from "./Controls";
+import style from "./Counter.module.css";
 
 class Counter extends Component {
   static defaultProps = {
@@ -28,15 +29,16 @@ class Counter extends Component {
 
   render() {
     return (
-      <div className="Counter">
-        <span className='Counter__value'>{this.state.value}</span>
-        <div className='Counter__controls'>
-          <button className="button" onClick={this.handleIncrement}>- 1</button>    
-          <button className="button" onClick={this.handleDecrement}>+ 1</button>  
-       </div>
+      <div className="Container">
+        <span className={style.value}>{this.state.value}</span>
+        <Controls
+          onIncrement = {this.handleIncrement}
+          onDecrement = {this.handleDecrement}
+        />
       </div>
     );
   }
 }
 
 export default Counter;
+
