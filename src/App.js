@@ -1,22 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Controls from './_components/Controls';
+import Statistics from "./_components/Statistics";
+import Section from "./_components/Section";
+import Notification from "./_components/Notification";
 import './styles.css';
 
 
 class App extends React.Component {
-  
-  static defauitProps = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  }
-
-  static typePrors = {
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
-  }
 
   state = {
     good: 0,
@@ -28,7 +18,7 @@ class App extends React.Component {
     this.setState(prevState => {
       const btnId = e.target.id;
       return { [btnId]: prevState[btnId] + 1 };
-     })
+    })
   }
 
   feedbackCounter = () =>
@@ -41,31 +31,33 @@ class App extends React.Component {
 
   render() {
     const { good, neutral, bad } = this.state;
-    const total = this.feedbackCounter();
-    const positivePercentage = this.positivePercentageCounter();
+    const total = this.feedbackCounter();;
 
     return (
-      <div className={'Container'}>
-        <h1>Please leave feedback</h1>  
-        <Controls
-          options={this.state}
-          leaveFeedback={this.handlerFeedback}
-        />
+      <div className='Container'>
+        
+        <Section title="Please leave feedback">
+          <Controls
+            options={this.state}
+            leaveFeedback={this.handlerFeedback}
+          />
+        </Section>
 
-        <h2>Statistics</h2>
-        {total === 0 && <p>No feedback given</p>}
-        {total > 0 && (
-        <ul>
-          <li className='value'>Good: <span>{good}</span></li>
-          <li className='value'>Neutral: <span>{neutral}</span></li>
-          <li className='value'>Bad: <span>{bad}</span></li>
-          <li className='value'>Total: <span>{total}</span></li>
-          <li className='value'>Positive feedback: <span>{positivePercentage}%</span></li>
-        </ul>
-        )}
+        <Section title="Statistic">
+          {total === 0 && <Notification message="No feedback given" />}
+          {total > 0 && (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={this.positivePercentageCounter()}
+            />
+          )}
+        </Section>
       </div>
-  );
-   }
+    );
+  }
 };
 
 export default App;
