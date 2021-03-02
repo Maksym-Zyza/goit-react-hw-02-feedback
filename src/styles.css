@@ -14,11 +14,11 @@ p {
   text-align: center;
 }
 
-.controls>button {
+.controls > button {
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
-  background-color: goldenrod;
+  background-color: #2988e5;
   color: #fff;
   font-weight: 500;
   margin-left: 5px;
@@ -30,7 +30,7 @@ p {
   transition: box-shadow 250ms linear;
 }
 
-.controls>button:active {
+.controls > button:active {
   box-shadow: 2px 5px 2px 0 rgb(0 0 0 / 0.5);
 }
 
